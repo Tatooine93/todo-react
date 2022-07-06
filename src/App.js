@@ -6,22 +6,18 @@ const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
 function App() {
 
-  const [todos, setTodos] = useState([
- /*  {id: 1, name:'Todo 1', complete: false},
-  {id: 2, name:'Todo 2', complete: false} */
-  ]);
-  
+  const [todos, setTodos] = useState([]);
   const todoNameRef = useRef();
 
   useEffect(() => {
-    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-    if (storedTodos) setTodos(storedTodos)
-  }, [])
-  
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTodos) {setTodos(storedTodos)}
+    console.log(storedTodos)
+  }, []);
+
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
-  }, [todos])
-  
+  }, [todos]);
 
   function addTodo() {
     const name = todoNameRef.current.value
