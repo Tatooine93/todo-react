@@ -8,12 +8,11 @@ export default function Todo({todo, toggleTodo}) {
     }
 
     return (
-    <div>
-        <label>
+    <div className={todo.name} style={{background: todo.complete ? "#008000" : 'transparent'}} >
+        <label >
             <input type="checkbox" checked={todo.complete} onChange={handleTodoClick}/>
             {todo.name}    
         </label>
-        
     </div>
     );
 }

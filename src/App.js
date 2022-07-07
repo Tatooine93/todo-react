@@ -1,6 +1,7 @@
 import React ,{useState, useRef, useEffect} from 'react';
 import TodoList from './TodoList';
 import { v4 as uuidv4 } from 'uuid'
+import style from './style.scss'
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
@@ -43,13 +44,37 @@ function App() {
     setTodos(newTodos)
   }
 
+  function TaskTodo(todo) {
+    const task = todos.filter(todo => !todo.complete).length
+
+    if ( task !== 0) {
+      return <div className='taskToComplete'>You have {todos.filter(todo => !todo.complete).length} task to complete</div>
+
+    }
+    return <div className='taskToComplete'>Congratulation !!! You have complete all of your task</div>
+
+  }
+
   return (
     <>
-      <input ref={todoNameRef} type="text"/>
-      <button onClick={addTodo}>Add a Todo</button>
-      <button onClick={clearTodos}>Clear Completed Task</button>
-      <TodoList todos={todos} toggleTodo={toggleTodo}/>
-      <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+      <header>
+        <input ref={todoNameRef} type="text" placeholder='Enter a new task'/>
+        <div className='buttonsContainer'>
+          <button onClick={addTodo}><p>Add a Todo</p></button>
+          <button onClick={clearTodos}><p>Clear Completed Task</p></button>
+        </div>
+        <TaskTodo />
+
+      </header>
+
+      <main >
+        <div className='taskContainer'>
+          <TodoList todos={todos} toggleTodo={toggleTodo}/>
+        </div>
+        
+      </main>
+
+    
     </>
   );
 }
